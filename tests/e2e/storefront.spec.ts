@@ -13,7 +13,7 @@ test.describe('Kamru Ghati Honey Storefront E2E Tests', () => {
     await expect(page.locator('text=Mandi').first()).toBeVisible();
 
     // Verify CTA buttons
-    const exploreBtn = page.getByRole('link', { name: /Explore Honey Varieties/i });
+    const exploreBtn = page.getByRole('link', { name: /Shop honey/i });
     await expect(exploreBtn).toBeVisible();
   });
 
