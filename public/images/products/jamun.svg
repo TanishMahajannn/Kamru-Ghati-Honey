@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgJamun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF7F5"/>
+      <stop offset="100%" stop-color="#EEE4DF"/>
+    </linearGradient>
+    <linearGradient id="jamunHoney" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C26A32"/>
+      <stop offset="50%" stop-color="#803418"/>
+      <stop offset="100%" stop-color="#48180B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" rx="24" fill="url(#bgJamun)"/>
+
+  <!-- Botanical branch with stylized Jamun leaves & berries -->
+  <g opacity="0.25" stroke="#573A2B" stroke-width="1.5" fill="none">
+    <path d="M 120 480 Q 90 340 140 190" />
+    <circle cx="140" cy="190" r="10" fill="#462E22"/>
+    <circle cx="120" cy="205" r="8" fill="#462E22"/>
+    <path d="M 480 490 Q 510 320 460 210" />
+    <circle cx="460" cy="210" r="9" fill="#462E22"/>
+  </g>
+
+  <!-- Shadow -->
+  <ellipse cx="300" cy="510" rx="140" ry="24" fill="#573A2B" opacity="0.22"/>
+
+  <!-- Jar Body with Deep Amber Liquid -->
+  <rect x="180" y="210" width="240" height="280" rx="30" fill="url(#jamunHoney)"/>
+
+  <!-- Glass Highlights -->
+  <rect x="180" y="210" width="240" height="280" rx="30" fill="none" stroke="#FFFFFF" stroke-width="6" opacity="0.75"/>
+  <rect x="195" y="230" width="22" height="240" rx="11" fill="#FFFFFF" opacity="0.4"/>
+
+  <!-- Jar Neck & Cap -->
+  <rect x="220" y="175" width="160" height="35" rx="6" fill="#F0E8D5" stroke="#E6D7BD" stroke-width="2"/>
+  <ellipse cx="300" cy="175" rx="100" ry="24" fill="#36231A"/>
+  <rect x="200" y="160" width="200" height="22" rx="6" fill="#36231A"/>
+  <ellipse cx="300" cy="160" rx="100" ry="18" fill="#271913"/>
+  <line x1="200" y1="182" x2="400" y2="182" stroke="#D9A441" stroke-width="3"/>
+
+  <!-- Label -->
+  <rect x="210" y="270" width="180" height="150" rx="12" fill="#FFFDF9" stroke="#E6D7BD" stroke-width="2" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.08))"/>
+  
+  <text x="300" y="315" font-family="'Playfair Display', Georgia, serif" font-size="12" font-weight="700" fill="#254D38" text-anchor="middle" letter-spacing="1">KAMRU GHATI</text>
+  <text x="300" y="345" font-family="'Inter', sans-serif" font-size="18" font-weight="800" fill="#462E22" text-anchor="middle">JAMUN</text>
+  <text x="300" y="365" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#946324" text-anchor="middle">BLACKBERRY BLOSSOM</text>
+  <line x1="240" y1="375" x2="360" y2="375" stroke="#E6D7BD" stroke-width="1"/>
+  <text x="300" y="393" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#573A2B" text-anchor="middle">DARK RICH AMBER</text>
+  <text x="300" y="407" font-family="'Inter', sans-serif" font-size="8" font-weight="500" fill="#8E6E5D" text-anchor="middle">LATE SPRING ORCHARDS</text>
+
+  <!-- Jamun Fruit / Blossom Badge -->
+  <g transform="translate(430, 390)">
+    <circle cx="40" cy="40" r="36" fill="#FFFFFF" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.1))"/>
+    <circle cx="40" cy="40" r="32" fill="#FAF7F5"/>
+    <ellipse cx="40" cy="40" rx="11" ry="16" fill="#36231A"/>
+    <ellipse cx="42" cy="38" rx="4" ry="7" fill="#FFFFFF" opacity="0.3"/>
+  </g>
+</svg>

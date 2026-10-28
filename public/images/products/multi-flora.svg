@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7"/>
+      <stop offset="100%" stop-color="#F4ECE1"/>
+    </linearGradient>
+    <linearGradient id="honeyAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F4C056"/>
+      <stop offset="50%" stop-color="#D99B26"/>
+      <stop offset="100%" stop-color="#B06F0F"/>
+    </linearGradient>
+    <linearGradient id="glassReflection" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="600" height="600" rx="24" fill="url(#bg)"/>
+
+  <!-- Subtle Botanical Background Motifs -->
+  <g opacity="0.15" stroke="#254D38" stroke-width="2" fill="none">
+    <path d="M 80 500 Q 140 400 120 300 Q 110 220 70 180" />
+    <circle cx="70" cy="180" r="12" fill="#D9A441"/>
+    <circle cx="120" cy="300" r="8" fill="#254D38"/>
+    <path d="M 520 520 Q 460 380 490 260" />
+    <circle cx="490" cy="260" r="14" fill="#D9A441"/>
+  </g>
+
+  <!-- Shadow under jar -->
+  <ellipse cx="300" cy="510" rx="140" ry="24" fill="#573A2B" opacity="0.18"/>
+
+  <!-- Jar Body Back & Liquid -->
+  <rect x="180" y="210" width="240" height="280" rx="30" fill="url(#honeyAmber)"/>
+
+  <!-- Honey Surface Curve -->
+  <path d="M 180 250 Q 300 270 420 250 L 420 460 Q 420 490 390 490 L 210 490 Q 180 490 180 460 Z" fill="#B06F0F" opacity="0.3"/>
+
+  <!-- Glass Jar Outline & Highlights -->
+  <rect x="180" y="210" width="240" height="280" rx="30" fill="none" stroke="#FFFFFF" stroke-width="6" opacity="0.8"/>
+  <rect x="180" y="210" width="240" height="280" rx="30" fill="url(#glassReflection)"/>
+
+  <!-- Vertical Glass Highlight -->
+  <rect x="195" y="230" width="22" height="240" rx="11" fill="#FFFFFF" opacity="0.45"/>
+
+  <!-- Jar Neck & Ring -->
+  <rect x="220" y="175" width="160" height="35" rx="6" fill="#F0E8D5" stroke="#E6D7BD" stroke-width="2"/>
+
+  <!-- Jar Cloth Cap / Rustic Fabric Lid -->
+  <path d="M 190 175 Q 300 150 410 175 C 425 200 395 210 380 205 Q 300 215 220 205 C 205 210 175 200 190 175 Z" fill="#254D38"/>
+  <ellipse cx="300" cy="165" rx="110" ry="22" fill="#1E402E"/>
+
+  <!-- Twine Tie around Lid -->
+  <path d="M 205 195 Q 300 205 395 195" stroke="#D9A441" stroke-width="5" fill="none"/>
+  <!-- Twine Knot -->
+  <circle cx="300" cy="202" r="7" fill="#D9A441"/>
+  <path d="M 300 207 Q 290 230 280 245" stroke="#D9A441" stroke-width="3" fill="none"/>
+  <path d="M 302 207 Q 312 232 322 250" stroke="#D9A441" stroke-width="3" fill="none"/>
+
+  <!-- Product Label on Jar -->
+  <rect x="210" y="270" width="180" height="150" rx="12" fill="#FFFDF9" stroke="#E6D7BD" stroke-width="2" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.08))"/>
+  
+  <!-- Label Content -->
+  <circle cx="300" cy="305" r="16" fill="#F8F3E8" stroke="#D9A441" stroke-width="1.5"/>
+  <polygon points="300,295 308,309 292,309" fill="#254D38"/>
+  <text x="300" y="338" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="700" fill="#254D38" text-anchor="middle" letter-spacing="1">KAMRU GHATI</text>
+  <text x="300" y="358" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#D9A441" text-anchor="middle">MULTI FLORA</text>
+  <line x1="240" y1="372" x2="360" y2="372" stroke="#E6D7BD" stroke-width="1"/>
+  <text x="300" y="390" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#573A2B" text-anchor="middle" letter-spacing="1.5">HIMALAYAN WILD FLORA</text>
+  <text x="300" y="405" font-family="'Inter', sans-serif" font-size="8" font-weight="500" fill="#8E6E5D" text-anchor="middle">MANDI, HIMACHAL PRADESH</text>
+
+  <!-- Honey Wooden Dipper Droplet (Artisan Badge) -->
+  <g transform="translate(430, 390)">
+    <circle cx="40" cy="40" r="36" fill="#FFFFFF" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.1))"/>
+    <circle cx="40" cy="40" r="32" fill="#F8F3E8"/>
+    <!-- Small flower blossom -->
+    <circle cx="40" cy="40" r="7" fill="#D9A441"/>
+    <circle cx="40" cy="27" r="5" fill="#254D38" opacity="0.8"/>
+    <circle cx="53" cy="40" r="5" fill="#254D38" opacity="0.8"/>
+    <circle cx="40" cy="53" r="5" fill="#254D38" opacity="0.8"/>
+    <circle cx="27" cy="40" r="5" fill="#254D38" opacity="0.8"/>
+  </g>
+</svg>
