@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'ghost' | 'pill';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
 }
@@ -22,25 +22,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-lg';
+      'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-honey-500 disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-full';
 
     const variants = {
       primary:
-        'bg-forest-500 hover:bg-forest-600 active:bg-forest-700 text-white shadow-sm focus:ring-forest-500',
+        'bg-honey-500 hover:bg-honey-600 active:bg-honey-700 text-earth-950 font-semibold shadow-2xs hover:shadow-sm',
       secondary:
-        'bg-honey-500 hover:bg-honey-600 active:bg-honey-700 text-earth-900 font-semibold shadow-sm focus:ring-honey-500',
+        'bg-earth-900 hover:bg-earth-800 text-cream-100 font-semibold shadow-2xs',
       outline:
-        'border-2 border-forest-500 text-forest-600 hover:bg-forest-50 active:bg-forest-100 focus:ring-forest-500',
+        'border border-earth-800/40 text-earth-900 hover:bg-earth-900/5 focus:ring-earth-800',
+      pill:
+        'bg-[#D59B3E] hover:bg-[#C58C32] text-earth-950 font-semibold tracking-wide text-xs sm:text-sm px-6 py-3 rounded-full shadow-2xs',
       whatsapp:
-        'bg-[#25D366] hover:bg-[#20BD5A] active:bg-[#1DA850] text-white shadow-sm font-semibold focus:ring-[#25D366]',
+        'bg-[#25D366] hover:bg-[#20BD5A] active:bg-[#1DA850] text-white shadow-2xs font-semibold',
       ghost:
-        'text-earth-700 hover:bg-cream-200 active:bg-cream-300 focus:ring-forest-500',
+        'text-earth-700 hover:bg-cream-200 text-earth-900',
     };
 
     const sizes = {
-      sm: 'text-xs px-3 py-1.5 gap-1.5',
-      md: 'text-sm px-4 py-2.5 gap-2',
-      lg: 'text-base px-6 py-3.5 gap-2.5',
+      sm: 'text-xs px-3.5 py-1.5 gap-1.5',
+      md: 'text-xs sm:text-sm px-5 py-2.5 gap-2',
+      lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5',
     };
 
     return (

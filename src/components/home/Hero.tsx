@@ -1,11 +1,12 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Locale } from '@/types/i18n';
 import { Dictionary } from '@/i18n/getDictionary';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { Sparkles, ArrowRight, ShieldCheck, MapPin, PackageCheck } from 'lucide-react';
+import { PRODUCTS } from '@/data/products';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 interface HeroProps {
   locale: Locale;
@@ -13,111 +14,166 @@ interface HeroProps {
 }
 
 export function Hero({ locale, dict }: HeroProps) {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-cream-100 via-cream-50 to-white pt-10 pb-16 md:pt-16 md:pb-24 border-b border-cream-200">
-      {/* Decorative mountain / subtle glow background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 85% 20%, rgba(217, 164, 65, 0.15) 0%, transparent 40%), radial-gradient(circle at 15% 80%, rgba(37, 77, 56, 0.08) 0%, transparent 45%)',
-        }}
-        aria-hidden="true"
-      />
+  const [activeIndex, setActiveIndex] = useState(0);
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Text Column */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+  const heroSlides = [
+    {
+      title: locale === 'hi' ? 'मल्टी फ्लोरा हनी' : 'Wildflower Honey',
+      variety: 'Multi Flora',
+      origin: locale === 'hi' ? 'मध्य-हिमालयी घाटियां, मंडी' : 'Mountain Valleys, Mandi',
+      image: '/images/hero-honey-jar.jpg',
+      fallbackImage: '/images/products/multi-flora.svg',
+      slug: 'multi-flora',
+      price: '₹420',
+    },
+    {
+      title: locale === 'hi' ? 'लाहौल स्पीति हनी' : 'Lahul Spiti Honey',
+      variety: 'Lahul Spiti',
+      origin: locale === 'hi' ? 'लाहौल एवं स्पीति' : 'Cold Desert Valley, Spiti',
+      image: '/images/products/lahul-spiti.jpg',
+      fallbackImage: '/images/products/lahul-spiti.svg',
+      slug: 'lahul-spiti',
+      price: '₹650',
+    },
+    {
+      title: locale === 'hi' ? 'अजवायन हनी' : 'Ajwain Honey',
+      variety: 'Ajwain',
+      origin: locale === 'hi' ? 'कैरम पुष्पीय क्षेत्र' : 'Carom Blossom Apiaries',
+      image: '/images/products/ajwain.jpg',
+      fallbackImage: '/images/products/ajwain.svg',
+      slug: 'ajwain',
+      price: '₹490',
+    },
+    {
+      title: locale === 'hi' ? 'जामुन हनी' : 'Jamun Honey',
+      variety: 'Jamun',
+      origin: locale === 'hi' ? 'मौसमी जामुन बागान' : 'Seasonal Blackberry Orchards',
+      image: '/images/products/jamun.jpg',
+      fallbackImage: '/images/products/jamun.svg',
+      slug: 'jamun',
+      price: '₹520',
+    },
+  ];
+
+  const currentSlide = heroSlides[activeIndex];
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <section className="relative bg-cream-100 pt-8 pb-16 md:pt-14 md:pb-20 border-b border-cream-300/70 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Editorial Headline & Copy */}
+          <div className="lg:col-span-5 space-y-6">
             <div>
-              <Badge variant="honey" size="md" className="mb-4 shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-honey-600" />
-                <span>{dict.hero.badge}</span>
-              </Badge>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-forest-900 tracking-tight leading-tight">
-                {dict.hero.title}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-ultra text-earth-500">
+                  {locale === 'hi' ? 'प्राकृतिक रूप से संकलित शहद • स्थापना 2020' : 'NATURALLY HARVESTED HONEY'}
+                </span>
+              </div>
+
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4.2rem] font-normal text-earth-900 tracking-tight leading-[1.08]">
+                {locale === 'hi' ? (
+                  <>
+                    शुद्ध, सीधे<br />छत्ते से।
+                  </>
+                ) : (
+                  <>
+                    Pure, from<br />the hive.
+                  </>
+                )}
               </h1>
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-earth-700/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              {dict.hero.subtitle}
+            <p className="text-sm sm:text-base text-earth-600 leading-relaxed max-w-md font-sans">
+              {locale === 'hi'
+                ? 'प्रकृति के वास्तविक रूप में असली शहद। मंडी, हिमाचल प्रदेश की घाटियों से सावधानीपूर्वक संकलित, शुद्ध स्वाद एवं पोषण से परिपूर्ण।'
+                : 'Real honey, the way nature intended. Naturally harvested, carefully sourced from Himachal Pradesh, rich in flavour and goodness.'}
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-              <Link href={`/${locale}/products`}>
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto text-base group">
-                  <span>{dict.hero.ctaPrimary}</span>
-                  <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                </Button>
+            {/* CTAs matching reference pill */}
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <Link
+                href={`/${locale}/products`}
+                className="inline-flex items-center gap-2 bg-[#D59B3E] hover:bg-[#C58C32] active:bg-[#B57C26] text-earth-950 text-xs sm:text-sm font-semibold tracking-wide px-7 py-3 rounded-full transition-all duration-200 shadow-2xs hover:shadow-xs group"
+              >
+                <span>{locale === 'hi' ? 'शहद उत्पाद देखें' : 'Shop honey'}</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
 
-              <Link href={`/${locale}/wholesale`}>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-base">
-                  <span>{dict.hero.ctaSecondary}</span>
-                </Button>
+              <Link
+                href={`/${locale}/wholesale`}
+                className="inline-flex items-center gap-2 text-earth-800 hover:text-earth-950 text-xs sm:text-sm font-semibold tracking-wide px-5 py-3 rounded-full border border-earth-300 hover:border-earth-500 transition-colors"
+              >
+                <span>{locale === 'hi' ? 'थोक खरीद' : 'Wholesale enquiry'}</span>
+                <span>→</span>
               </Link>
-            </div>
-
-            {/* Factual Milestone Badges */}
-            <div className="pt-8 border-t border-cream-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
-              <div className="text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start gap-1 text-forest-700">
-                  <MapPin className="w-4 h-4 text-honey-600" />
-                  <span className="font-serif font-bold text-xl sm:text-2xl text-forest-800">
-                    {dict.hero.stat1Value}
-                  </span>
-                </div>
-                <p className="text-xs text-earth-700/80 mt-1 font-medium">
-                  {dict.hero.stat1Label}
-                </p>
-              </div>
-
-              <div className="text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start gap-1 text-forest-700">
-                  <ShieldCheck className="w-4 h-4 text-honey-600" />
-                  <span className="font-serif font-bold text-xl sm:text-2xl text-forest-800">
-                    {dict.hero.stat2Value}
-                  </span>
-                </div>
-                <p className="text-xs text-earth-700/80 mt-1 font-medium">
-                  {dict.hero.stat2Label}
-                </p>
-              </div>
-
-              <div className="text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start gap-1 text-forest-700">
-                  <PackageCheck className="w-4 h-4 text-honey-600" />
-                  <span className="font-serif font-bold text-xl sm:text-2xl text-forest-800">
-                    {dict.hero.stat3Value}
-                  </span>
-                </div>
-                <p className="text-xs text-earth-700/80 mt-1 font-medium">
-                  {dict.hero.stat3Label}
-                </p>
-              </div>
             </div>
           </div>
 
-          {/* Right Product Illustration Column */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md aspect-square bg-gradient-to-tr from-cream-200/60 to-white rounded-3xl p-6 shadow-card border border-cream-300/80 flex items-center justify-center">
-              <div className="relative w-full h-full">
+          {/* Right Column: Hero Visual on Stone Slab with Carousel Controls */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-end">
+            <div className="relative w-full max-w-xl aspect-4/3 rounded-2xl overflow-hidden bg-cream-200/60 shadow-warm border border-cream-300/80 p-2 sm:p-4 flex items-center justify-center">
+              {/* Image */}
+              <div className="relative w-full h-full rounded-xl overflow-hidden">
                 <Image
-                  src="/images/products/multi-flora.svg"
-                  alt={dict.common.brandName}
+                  src={currentSlide.image}
+                  alt={currentSlide.title}
                   fill
                   priority
-                  className="object-contain p-2 hover:scale-102 transition-transform duration-300"
+                  className="object-cover object-center transition-all duration-500 hover:scale-102"
+                  onError={(e) => {
+                    // Fallback to SVG illustration if photo is still caching
+                    const target = e.target as HTMLImageElement;
+                    if (target.src !== currentSlide.fallbackImage) {
+                      target.src = currentSlide.fallbackImage;
+                    }
+                  }}
                 />
               </div>
 
-              {/* Floating verified badge */}
-              <div className="absolute -bottom-4 right-4 bg-white/95 backdrop-blur-xs py-2.5 px-4 rounded-xl shadow-md border border-cream-200 text-xs text-earth-800 flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-forest-500 animate-pulse" />
-                <span className="font-semibold text-forest-800">
-                  {locale === 'hi' ? 'सीधा स्रोत • मंडी, हि.प्र.' : 'Direct Source • Mandi, HP'}
-                </span>
+              {/* Subtle floating jar badge */}
+              <div className="absolute bottom-6 left-6 bg-cream-100/90 backdrop-blur-md px-4 py-2 rounded-xl border border-cream-300/70 shadow-sm text-left">
+                <p className="font-serif font-bold text-xs sm:text-sm text-earth-900 leading-tight">
+                  {currentSlide.title}
+                </p>
+                <p className="text-[10px] text-earth-500 font-sans tracking-wide">
+                  {currentSlide.origin}
+                </p>
+              </div>
+            </div>
+
+            {/* Carousel navigation matching reference (01 — 04 < >) */}
+            <div className="w-full max-w-xl flex items-center justify-between pt-4 px-2 text-xs text-earth-600">
+              <div className="flex items-center gap-2 font-mono font-medium tracking-widest text-[11px]">
+                <span className="text-earth-900 font-bold">0{activeIndex + 1}</span>
+                <span className="text-earth-400">—</span>
+                <span className="text-earth-400">0{heroSlides.length}</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="w-8 h-8 rounded-full border border-earth-300 flex items-center justify-center text-earth-700 hover:bg-cream-200 hover:text-earth-900 transition-colors focus:outline-none"
+                  aria-label="Previous honey variety"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="w-8 h-8 rounded-full border border-earth-300 flex items-center justify-center text-earth-700 hover:bg-cream-200 hover:text-earth-900 transition-colors focus:outline-none"
+                  aria-label="Next honey variety"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>

@@ -10,70 +10,71 @@ const config: Config = {
     extend: {
       colors: {
         cream: {
-          50: '#FDFCF8',
-          100: '#F8F3E8', // Warm cream
-          200: '#F0E8D5',
-          300: '#E6D7BD',
-          400: '#D9C49F',
+          50: '#FCF9F4',
+          100: '#F8F3EA', // Main warm stone background from reference
+          200: '#F2EBDF',
+          300: '#E6DCCF', // Hairline borders
+          400: '#D6C8B7',
         },
         honey: {
-          50: '#FDF9EE',
-          100: '#FBF2DA',
-          200: '#F5E3B0',
-          300: '#ECCF81',
-          400: '#E4BC57',
-          500: '#D9A441', // Honey gold
-          600: '#BA842E',
-          700: '#946324',
-          800: '#764D20',
-          900: '#5F3D1C',
+          50: '#FDF8EC',
+          100: '#FAF0D7',
+          200: '#F4DEAC',
+          300: '#ECC87C',
+          400: '#DFAC4B',
+          500: '#D49B3E', // Signature warm ochre button color
+          600: '#BA822C',
+          700: '#956420',
+          800: '#754B1A',
+          900: '#5A3814',
         },
         forest: {
-          50: '#F2F7F4',
-          100: '#DEEBE4',
-          200: '#BFDACB',
-          300: '#96C2AC',
-          400: '#65A385',
-          500: '#254D38', // Forest green
-          600: '#1E402E',
+          50: '#F1F6F3',
+          100: '#DEEBE2',
+          200: '#BFDAC9',
+          500: '#254D38',
+          600: '#1D3E2D',
           700: '#173224',
           800: '#11251B',
           900: '#0C1A13',
         },
         earth: {
-          100: '#EFEAE6',
-          200: '#DFD5CD',
-          300: '#BFABA0',
-          400: '#8E6E5D',
-          500: '#573A2B', // Earth brown
-          600: '#462E22',
-          700: '#36231A',
-          800: '#271913',
-          900: '#1B110D',
+          50: '#F7F5F2',
+          100: '#ECE7E1',
+          200: '#DCD4CA',
+          300: '#C2B5A5',
+          400: '#9B8C7D', // Subtle labels
+          500: '#706254',
+          600: '#574B40',
+          700: '#42372F', // Body copy
+          800: '#2C241E',
+          900: '#1C1713', // Deep headline espresso
         },
       },
       fontFamily: {
-        sans: [
-          'var(--font-inter)',
-          'var(--font-noto-sans-devanagari)',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'sans-serif',
-        ],
         serif: [
-          'var(--font-playfair)',
+          'var(--font-serif)',
+          '"Cormorant Garamond"',
+          '"Playfair Display"',
           'Georgia',
-          'Cambria',
-          'Times New Roman',
           'serif',
         ],
+        sans: [
+          'var(--font-sans)',
+          '"Plus Jakarta Sans"',
+          '"Inter"',
+          '"Noto Sans Devanagari"',
+          'system-ui',
+          'sans-serif',
+        ],
+      },
+      letterSpacing: {
+        widest: '.2em',
+        ultra: '.28em',
       },
       boxShadow: {
-        card: '0 2px 12px -2px rgba(87, 58, 43, 0.08), 0 1px 4px -1px rgba(87, 58, 43, 0.04)',
-        'card-hover': '0 8px 24px -4px rgba(87, 58, 43, 0.12), 0 2px 8px -2px rgba(87, 58, 43, 0.06)',
+        warm: '0 4px 20px -2px rgba(44, 36, 30, 0.05), 0 2px 6px -1px rgba(44, 36, 30, 0.03)',
+        'warm-hover': '0 12px 30px -4px rgba(44, 36, 30, 0.08), 0 4px 12px -2px rgba(44, 36, 30, 0.04)',
       },
     },
   },

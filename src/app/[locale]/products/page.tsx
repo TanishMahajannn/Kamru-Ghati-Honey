@@ -5,7 +5,7 @@ import { getDictionary } from '@/i18n/getDictionary';
 import { getActiveProducts } from '@/data/products';
 import { ProductGrid } from '@/components/products/ProductGrid';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { Sparkles, Building2, ArrowRight } from 'lucide-react';
+import { Building2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
@@ -41,51 +41,49 @@ export default async function ProductsPage({
   ];
 
   return (
-    <div className="py-8 md:py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Breadcrumb Navigation */}
+    <div className="py-8 md:py-16 bg-cream-100 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <Breadcrumbs items={breadcrumbs} locale={locale} />
 
         {/* Header */}
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-honey-600">
-            <Sparkles className="w-4 h-4" />
-            <span>{locale === 'hi' ? 'प्राकृतिक पुष्पीय संकलन' : 'Himalayan Floral Harvests'}</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-forest-900 tracking-tight">
+          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-ultra text-earth-500">
+            {locale === 'hi' ? 'प्राकृतिक पुष्पीय संकलन' : 'HIMALAYAN BOTANICAL HARVESTS'}
+          </span>
+          <h1 className="font-serif text-4xl sm:text-5xl font-normal text-earth-900 tracking-tight leading-tight">
             {dict.catalogue.title}
           </h1>
-          <p className="text-base sm:text-lg text-earth-700/90 leading-relaxed">
+          <p className="text-sm sm:text-base text-earth-600 leading-relaxed font-sans max-w-2xl">
             {dict.catalogue.subtitle}
           </p>
         </div>
 
-        {/* Filterable Product Grid */}
+        {/* Filterable Grid */}
         <ProductGrid products={products} locale={locale} dict={dict} />
 
         {/* Wholesale Callout */}
-        <div className="mt-16 bg-cream-50 rounded-3xl p-8 sm:p-10 border border-cream-200 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 bg-cream-50 rounded-2xl p-8 sm:p-10 border border-cream-200/90 shadow-warm flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2 text-forest-700 text-xs font-bold uppercase">
+            <div className="flex items-center justify-center md:justify-start gap-2 text-earth-500 text-[10px] sm:text-xs font-semibold uppercase tracking-ultra">
               <Building2 className="w-4 h-4 text-honey-600" />
               <span>{dict.wholesale.badge}</span>
             </div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-forest-900">
+            <h2 className="font-serif text-2xl font-normal text-earth-900">
               {locale === 'hi'
                 ? 'क्या आप थोक या व्यावसायिक मात्रा में ऑर्डर करना चाहते हैं?'
-                : 'Looking to purchase in bulk or retail cases?'}
+                : 'Looking to purchase in bulk or wholesale cases?'}
             </h2>
-            <p className="text-xs sm:text-sm text-earth-700/80 max-w-xl">
+            <p className="text-xs sm:text-sm text-earth-600 max-w-xl font-sans">
               {locale === 'hi'
                 ? 'दुकानों, वितरकों और व्यावसायिक ग्राहकों के लिए विशेष थोक दरें एवं कस्टम पैकेजिंग उपलब्ध हैं।'
-                : 'Special bulk rates, direct dispatch from Mandi, and flexible packaging sizes available for business clients.'}
+                : 'Special bulk trade rates, direct dispatch from Mandi, and multi-size packaging available for retailers and practitioners.'}
             </p>
           </div>
 
           <Link href={`/${locale}/wholesale`} className="flex-shrink-0">
-            <Button variant="secondary" size="md">
+            <Button variant="pill" size="md">
               <span>{dict.common.enquireWholesale}</span>
-              <ArrowRight className="w-4 h-4 ml-1.5" />
+              <span className="ml-1">→</span>
             </Button>
           </Link>
         </div>

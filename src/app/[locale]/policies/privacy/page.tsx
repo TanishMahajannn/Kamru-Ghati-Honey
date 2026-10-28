@@ -36,7 +36,7 @@ export default async function PrivacyPolicyPage({
   ];
 
   return (
-    <div className="py-8 md:py-16 bg-white">
+    <div className="py-8 md:py-16 bg-cream-100 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={breadcrumbs} locale={locale} />
 

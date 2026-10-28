@@ -5,59 +5,34 @@ export interface BrandLogoProps {
   showSubtitle?: boolean;
 }
 
-export function BrandLogo({ className = 'h-10 w-auto', showSubtitle = true }: BrandLogoProps) {
+export function BrandLogo({ className = '', showSubtitle = true }: BrandLogoProps) {
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
-      {/* Emblem SVG */}
+    <div className={`flex flex-col items-center text-center select-none ${className}`}>
+      {/* Refined botanical emblem */}
       <svg
-        viewBox="0 0 100 100"
-        className="w-10 h-10 flex-shrink-0"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 40 28"
+        className="w-7 h-5 text-honey-600 mb-1"
+        fill="currentColor"
         aria-hidden="true"
       >
-        {/* Hexagon Border */}
-        <polygon
-          points="50,6 90,28 90,72 50,94 10,72 10,28"
-          fill="#F8F3E8"
-          stroke="#D9A441"
-          strokeWidth="3.5"
-        />
-        <polygon
-          points="50,13 83,31 83,69 50,87 17,69 17,31"
-          fill="#FFFFFF"
-          stroke="#254D38"
-          strokeWidth="1.5"
-          strokeDasharray="3 2"
-        />
-        {/* Mountain peaks */}
-        <path d="M22,70 L40,42 L52,58 L65,36 L78,70 Z" fill="#254D38" />
-        <path d="M40,42 L46,50 L34,50 Z" fill="#F8F3E8" opacity="0.8" />
-        <path d="M65,36 L71,46 L59,46 Z" fill="#F8F3E8" opacity="0.8" />
-        {/* Honey drop/sun */}
-        <circle cx="50" cy="29" r="6" fill="#D9A441" />
-        {/* Little Honey Bee */}
-        <ellipse cx="50" cy="62" rx="5.5" ry="3.5" fill="#D9A441" />
-        <ellipse cx="46" cy="58" rx="3.5" ry="2" fill="#FFFFFF" opacity="0.9" transform="rotate(-30 46 58)" />
-        <ellipse cx="54" cy="58" rx="3.5" ry="2" fill="#FFFFFF" opacity="0.9" transform="rotate(30 54 58)" />
+        {/* Center petal/leaf */}
+        <path d="M 20 2 C 17 9 17 19 20 26 C 23 19 23 9 20 2 Z" opacity="0.9" />
+        {/* Left leaf */}
+        <path d="M 18 12 C 12 11 6 15 3 21 C 9 21 15 18 18 14 Z" opacity="0.75" />
+        {/* Right leaf */}
+        <path d="M 22 12 C 28 11 34 15 37 21 C 31 21 25 18 22 14 Z" opacity="0.75" />
       </svg>
 
-      {/* Brand Text */}
-      <div className="flex flex-col">
-        <span className="font-serif font-bold text-forest-700 tracking-wider text-base md:text-lg leading-tight">
-          KAMRU GHATI
+      {/* Brand Name */}
+      <span className="font-serif font-bold text-earth-900 tracking-[0.22em] text-sm sm:text-base uppercase leading-none">
+        KAMRU GHATI
+      </span>
+
+      {showSubtitle && (
+        <span className="text-[9px] font-sans font-medium tracking-[0.24em] text-earth-400 uppercase mt-1">
+          PURE BY NATURE • EST. 2020
         </span>
-        <div className="flex items-center gap-1.5 leading-none">
-          <span className="text-honey-600 font-bold tracking-widest text-xs uppercase">
-            HONEY
-          </span>
-          {showSubtitle && (
-            <span className="text-[10px] text-earth-700/80 font-medium tracking-tight">
-              • EST. 2020 • MANDI
-            </span>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 }

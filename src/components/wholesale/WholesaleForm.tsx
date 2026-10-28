@@ -7,7 +7,6 @@ import { PRODUCTS } from '@/data/products';
 import { wholesaleFormSchema, WholesaleFormValues } from '@/lib/validation';
 import { buildWholesaleEnquiryText, createWhatsAppUrl } from '@/lib/whatsapp';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import { MessageCircle, CheckSquare, Square, AlertCircle, Building2, User, Phone, Mail, MapPin, Package } from 'lucide-react';
 import { appConfig } from '@/lib/config';
 
@@ -22,7 +21,7 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
     businessName: '',
     phone: '',
     email: '',
-    selectedProducts: [PRODUCTS[0].slug], // default to first
+    selectedProducts: [PRODUCTS[0].slug],
     preferredSizes: ['500 g', '1 kg'],
     estimatedQuantity: '',
     deliveryLocation: '',
@@ -80,16 +79,12 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
       setErrors(fieldErrors);
       setIsSubmitting(false);
 
-      // Scroll to first error
       const firstErrorField = Object.keys(fieldErrors)[0];
       const el = document.getElementById(firstErrorField);
-      if (el) {
-        el.focus();
-      }
+      if (el) el.focus();
       return;
     }
 
-    // Map selected product slugs to human-readable names
     const resolvedProductNames = result.data.selectedProducts.map((slug) => {
       const prod = PRODUCTS.find((p) => p.slug === slug);
       return prod ? (locale === 'hi' ? prod.name.hi : prod.name.en) : slug;
@@ -113,23 +108,23 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
   };
 
   return (
-    <Card className="p-6 sm:p-10 bg-white border border-cream-300 shadow-card">
-      <div className="mb-8">
-        <h2 className="font-serif text-2xl sm:text-3xl font-bold text-forest-900">
+    <div className="p-6 sm:p-10 bg-cream-50 rounded-2xl border border-cream-200 shadow-warm">
+      <div className="mb-8 space-y-1">
+        <h2 className="font-serif text-2xl sm:text-3xl font-normal text-earth-900">
           {dict.wholesale.cardTitle}
         </h2>
-        <p className="mt-2 text-sm text-earth-700/80">
+        <p className="text-xs sm:text-sm text-earth-600 font-sans">
           {dict.wholesale.cardSubtitle}
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-6">
+      <form onSubmit={handleSubmit} noValidate className="space-y-6 font-sans">
         {/* Contact Information */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Full Name */}
           <div className="space-y-1.5">
-            <label htmlFor="name" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <User className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="name" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <User className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.nameLabel}</span>
             </label>
             <input
@@ -141,10 +136,10 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               placeholder={dict.wholesale.form.namePlaceholder}
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
-              className={`w-full text-sm px-3.5 py-2.5 rounded-xl border bg-white text-earth-900 focus:outline-none focus:ring-2 ${
+              className={`w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 ${
                 errors.name
                   ? 'border-red-500 focus:ring-red-400 bg-red-50/20'
-                  : 'border-cream-300 focus:ring-forest-500'
+                  : 'border-cream-300 focus:ring-honey-500'
               }`}
             />
             {errors.name && (
@@ -156,8 +151,8 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
 
           {/* Business Name */}
           <div className="space-y-1.5">
-            <label htmlFor="businessName" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <Building2 className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="businessName" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <Building2 className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.businessLabel}</span>
             </label>
             <input
@@ -166,14 +161,14 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               value={formData.businessName}
               onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
               placeholder={dict.wholesale.form.businessPlaceholder}
-              className="w-full text-sm px-3.5 py-2.5 rounded-xl border border-cream-300 bg-white text-earth-900 focus:outline-none focus:ring-2 focus:ring-forest-500"
+              className="w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-cream-300 bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 focus:ring-honey-500"
             />
           </div>
 
-          {/* Phone Number */}
+          {/* Phone */}
           <div className="space-y-1.5">
-            <label htmlFor="phone" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <Phone className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="phone" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <Phone className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.phoneLabel}</span>
             </label>
             <input
@@ -185,10 +180,10 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               placeholder={dict.wholesale.form.phonePlaceholder}
               aria-invalid={!!errors.phone}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
-              className={`w-full text-sm px-3.5 py-2.5 rounded-xl border bg-white text-earth-900 focus:outline-none focus:ring-2 ${
+              className={`w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 ${
                 errors.phone
                   ? 'border-red-500 focus:ring-red-400 bg-red-50/20'
-                  : 'border-cream-300 focus:ring-forest-500'
+                  : 'border-cream-300 focus:ring-honey-500'
               }`}
             />
             {errors.phone && (
@@ -200,8 +195,8 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
 
           {/* Email */}
           <div className="space-y-1.5">
-            <label htmlFor="email" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <Mail className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="email" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <Mail className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.emailLabel}</span>
             </label>
             <input
@@ -212,10 +207,10 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               placeholder={dict.wholesale.form.emailPlaceholder}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'email-error' : undefined}
-              className={`w-full text-sm px-3.5 py-2.5 rounded-xl border bg-white text-earth-900 focus:outline-none focus:ring-2 ${
+              className={`w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 ${
                 errors.email
                   ? 'border-red-500 focus:ring-red-400 bg-red-50/20'
-                  : 'border-cream-300 focus:ring-forest-500'
+                  : 'border-cream-300 focus:ring-honey-500'
               }`}
             />
             {errors.email && (
@@ -228,7 +223,7 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
 
         {/* Product Varieties Checkboxes */}
         <fieldset className="space-y-2 pt-2">
-          <legend className="text-xs font-bold text-forest-900 block mb-1">
+          <legend className="text-xs font-semibold text-earth-800 block mb-1 uppercase tracking-wider">
             {dict.wholesale.form.productsLabel}
           </legend>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -240,15 +235,15 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
                   type="button"
                   key={prod.slug}
                   onClick={() => toggleProduct(prod.slug)}
-                  className={`flex items-center gap-3 p-3 rounded-xl border text-left transition-all focus:outline-none focus:ring-2 focus:ring-forest-500 ${
+                  className={`flex items-center gap-3 p-3 rounded-xl border text-left transition-all focus:outline-none focus:ring-1 focus:ring-honey-500 ${
                     isChecked
-                      ? 'border-forest-600 bg-forest-50/80 text-forest-950 font-medium'
-                      : 'border-cream-300 bg-cream-50/40 text-earth-800 hover:bg-cream-100'
+                      ? 'border-earth-900 bg-cream-100 text-earth-950 font-semibold'
+                      : 'border-cream-300 bg-cream-50/60 text-earth-700 hover:bg-cream-100'
                   }`}
                   aria-pressed={isChecked}
                 >
                   {isChecked ? (
-                    <CheckSquare className="w-4 h-4 text-forest-600 flex-shrink-0" />
+                    <CheckSquare className="w-4 h-4 text-earth-900 flex-shrink-0" />
                   ) : (
                     <Square className="w-4 h-4 text-cream-400 flex-shrink-0" />
                   )}
@@ -266,7 +261,7 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
 
         {/* Jar Packaging Sizes Checkboxes */}
         <fieldset className="space-y-2 pt-2">
-          <legend className="text-xs font-bold text-forest-900 block mb-1">
+          <legend className="text-xs font-semibold text-earth-800 block mb-1 uppercase tracking-wider">
             {dict.wholesale.form.sizesLabel}
           </legend>
           <div className="grid grid-cols-3 gap-3">
@@ -277,15 +272,15 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
                   type="button"
                   key={size}
                   onClick={() => toggleSize(size)}
-                  className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-center transition-all focus:outline-none focus:ring-2 focus:ring-forest-500 ${
+                  className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-center transition-all focus:outline-none focus:ring-1 focus:ring-honey-500 ${
                     isChecked
-                      ? 'border-forest-600 bg-forest-50/80 text-forest-950 font-bold'
-                      : 'border-cream-300 bg-cream-50/40 text-earth-800 hover:bg-cream-100'
+                      ? 'border-earth-900 bg-cream-100 text-earth-950 font-bold'
+                      : 'border-cream-300 bg-cream-50/60 text-earth-700 hover:bg-cream-100'
                   }`}
                   aria-pressed={isChecked}
                 >
                   {isChecked ? (
-                    <CheckSquare className="w-4 h-4 text-forest-600 flex-shrink-0" />
+                    <CheckSquare className="w-4 h-4 text-earth-900 flex-shrink-0" />
                   ) : (
                     <Square className="w-4 h-4 text-cream-400 flex-shrink-0" />
                   )}
@@ -303,10 +298,9 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
 
         {/* Quantity & Location */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
-          {/* Estimated Quantity */}
           <div className="space-y-1.5">
-            <label htmlFor="estimatedQuantity" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <Package className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="estimatedQuantity" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <Package className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.quantityLabel}</span>
             </label>
             <input
@@ -318,10 +312,10 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               placeholder={dict.wholesale.form.quantityPlaceholder}
               aria-invalid={!!errors.estimatedQuantity}
               aria-describedby={errors.estimatedQuantity ? 'quantity-error' : undefined}
-              className={`w-full text-sm px-3.5 py-2.5 rounded-xl border bg-white text-earth-900 focus:outline-none focus:ring-2 ${
+              className={`w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 ${
                 errors.estimatedQuantity
                   ? 'border-red-500 focus:ring-red-400 bg-red-50/20'
-                  : 'border-cream-300 focus:ring-forest-500'
+                  : 'border-cream-300 focus:ring-honey-500'
               }`}
             />
             {errors.estimatedQuantity && (
@@ -331,10 +325,9 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
             )}
           </div>
 
-          {/* Delivery Location / PIN */}
           <div className="space-y-1.5">
-            <label htmlFor="deliveryLocation" className="flex items-center gap-1.5 text-xs font-bold text-forest-900">
-              <MapPin className="w-3.5 h-3.5 text-forest-600" />
+            <label htmlFor="deliveryLocation" className="flex items-center gap-1.5 text-xs font-semibold text-earth-800 uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5 text-earth-500" />
               <span>{dict.wholesale.form.locationLabel}</span>
             </label>
             <input
@@ -346,10 +339,10 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               placeholder={dict.wholesale.form.locationPlaceholder}
               aria-invalid={!!errors.deliveryLocation}
               aria-describedby={errors.deliveryLocation ? 'location-error' : undefined}
-              className={`w-full text-sm px-3.5 py-2.5 rounded-xl border bg-white text-earth-900 focus:outline-none focus:ring-2 ${
+              className={`w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 ${
                 errors.deliveryLocation
                   ? 'border-red-500 focus:ring-red-400 bg-red-50/20'
-                  : 'border-cream-300 focus:ring-forest-500'
+                  : 'border-cream-300 focus:ring-honey-500'
               }`}
             />
             {errors.deliveryLocation && (
@@ -360,9 +353,9 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
           </div>
         </div>
 
-        {/* Message / Details */}
+        {/* Message */}
         <div className="space-y-1.5 pt-2">
-          <label htmlFor="message" className="block text-xs font-bold text-forest-900">
+          <label htmlFor="message" className="block text-xs font-semibold text-earth-800 uppercase tracking-wider">
             {dict.wholesale.form.messageLabel}
           </label>
           <textarea
@@ -371,21 +364,21 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             placeholder={dict.wholesale.form.messagePlaceholder}
-            className="w-full text-sm p-3.5 rounded-xl border border-cream-300 bg-white text-earth-900 focus:outline-none focus:ring-2 focus:ring-forest-500 leading-relaxed"
+            className="w-full text-xs sm:text-sm p-4 rounded-xl border border-cream-300 bg-cream-100/60 text-earth-900 focus:outline-none focus:ring-1 focus:ring-honey-500 leading-relaxed"
           />
         </div>
 
-        {/* Submit Action */}
+        {/* Submit */}
         <div className="pt-4 space-y-4">
           {appConfig.whatsapp.isConfigured ? (
             <Button
               type="submit"
-              variant="whatsapp"
+              variant="pill"
               size="lg"
               isLoading={isSubmitting}
-              className="w-full text-base sm:text-lg py-4 shadow-md"
+              className="w-full text-sm sm:text-base py-3.5 shadow-2xs"
             >
-              <MessageCircle className="w-5 h-5 mr-2" />
+              <MessageCircle className="w-4 h-4 mr-2" />
               <span>{dict.wholesale.form.submitButton}</span>
             </Button>
           ) : (
@@ -393,20 +386,15 @@ export function WholesaleForm({ locale, dict }: WholesaleFormProps) {
               <AlertCircle className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold">{dict.common.pendingSetup}</p>
-                <p className="text-xs mt-1">
-                  {locale === 'hi'
-                    ? 'कृपया सीधे मंडी कार्यालय से संपर्क करें अथवा व्हाट्सएप नंबर कॉन्फ़िगरेशन की प्रतीक्षा करें।'
-                    : 'Please contact the Mandi dispatch office directly or wait until the WhatsApp ordering number is configured.'}
-                </p>
               </div>
             </div>
           )}
 
-          <p className="text-xs text-earth-700/80 leading-relaxed text-center sm:text-left">
+          <p className="text-xs text-earth-500 leading-relaxed text-center sm:text-left">
             {dict.wholesale.form.disclaimer}
           </p>
         </div>
       </form>
-    </Card>
+    </div>
   );
 }

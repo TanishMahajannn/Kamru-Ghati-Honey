@@ -19,67 +19,49 @@ export function Header({ locale, dict }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Prevent scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
-
   const navLinks = [
-    { href: `/${locale}`, label: dict.nav.home },
     { href: `/${locale}/products`, label: dict.nav.products },
-    { href: `/${locale}/about`, label: dict.nav.about },
+    { href: `/${locale}/about`, label: locale === 'hi' ? 'उत्पत्ति एवं स्रोत' : 'Origins' },
     { href: `/${locale}/wholesale`, label: dict.nav.wholesale },
+    { href: `/${locale}/about`, label: dict.nav.about },
     { href: `/${locale}/contact`, label: dict.nav.contact },
   ];
 
   const quickWhatsAppUrl = appConfig.whatsapp.isConfigured
     ? `https://wa.me/${appConfig.whatsapp.number}?text=${encodeURIComponent(
         locale === 'hi'
-          ? 'नमस्ते कामरू घाटी हनी, मैं आपके शहद उत्पादों के संबंध में जानकारी चाहता/चाहती हूँ।'
-          : 'Hello Kamru Ghati Honey, I would like to enquire about your honey products.'
+          ? 'नमस्ते कामरू घाटी हनी, मैं आपके शहद उत्पादों के बारे में जानकारी चाहता/चाहती हूँ।'
+          : 'Hello Kamru Ghati Honey, I would like to enquire about your honey varieties.'
       )}`
     : null;
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-cream-200 shadow-xs">
+    <header className="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-xs border-b border-cream-300/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Brand Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center focus:outline-none focus:ring-2 focus:ring-forest-500 rounded-lg p-1"
+            className="flex items-center focus:outline-none focus:ring-1 focus:ring-honey-500 rounded-md py-1"
             aria-label={dict.common.brandName}
           >
             <BrandLogo />
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
-            {navLinks.map((link) => {
-              const isActive =
-                link.href === `/${locale}`
-                  ? pathname === `/${locale}`
-                  : pathname.startsWith(link.href);
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-7 lg:gap-10" aria-label="Main Navigation">
+            {navLinks.map((link, idx) => {
+              const isActive = pathname === link.href;
               return (
                 <Link
-                  key={link.href}
+                  key={`${link.href}-${idx}`}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-forest-600 focus:outline-none focus:ring-2 focus:ring-forest-500 rounded-md px-1 py-1 ${
-                    isActive
-                      ? 'text-forest-700 font-bold border-b-2 border-honey-500 -mb-0.5'
-                      : 'text-earth-800'
+                  className={`text-xs uppercase tracking-[0.16em] font-medium transition-colors hover:text-earth-900 focus:outline-none focus:underline ${
+                    isActive ? 'text-earth-900 font-semibold' : 'text-earth-600'
                   }`}
                 >
                   {link.label}
@@ -88,7 +70,7 @@ export function Header({ locale, dict }: HeaderProps) {
             })}
           </nav>
 
-          {/* Actions: Language Switcher & WhatsApp Button */}
+          {/* Right Action: Language Switcher & WhatsApp Pill */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
 
@@ -97,36 +79,25 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={quickWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs lg:text-sm font-semibold px-3.5 py-2 rounded-lg shadow-xs transition-colors focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
+                className="inline-flex items-center gap-1.5 bg-earth-900 hover:bg-earth-800 text-cream-100 text-xs uppercase tracking-wider font-semibold px-4 py-2 rounded-full transition-colors focus:outline-none focus:ring-1 focus:ring-honey-500 shadow-2xs"
                 aria-label={dict.nav.quickWhatsApp}
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>{dict.nav.quickWhatsApp}</span>
+                <MessageCircle className="w-3.5 h-3.5 text-honey-400" />
+                <span>{locale === 'hi' ? 'व्हाट्सएप' : 'Enquire'}</span>
               </a>
-            ) : (
-              <span className="text-xs text-earth-700/60 border border-cream-300 rounded px-2 py-1 bg-cream-50">
-                {locale === 'hi' ? 'व्हाट्सएप: सेटअप लंबित' : 'WhatsApp pending'}
-              </span>
-            )}
+            ) : null}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-3">
             <LanguageSwitcher currentLocale={locale} />
-
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-earth-800 hover:text-forest-700 hover:bg-cream-100 focus:outline-none focus:ring-2 focus:ring-forest-500"
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-navigation"
-              aria-label="Toggle Navigation Menu"
+              className="p-2 text-earth-800 hover:text-earth-900 focus:outline-none"
+              aria-label="Toggle navigation menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" aria-hidden="true" />
-              ) : (
-                <Menu className="w-6 h-6" aria-hidden="true" />
-              )}
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -134,47 +105,34 @@ export function Header({ locale, dict }: HeaderProps) {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="md:hidden fixed inset-0 top-[113px] bg-white z-50 overflow-y-auto border-t border-cream-200 px-6 py-8 flex flex-col justify-between"
-        >
-          <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-            {navLinks.map((link) => {
-              const isActive =
-                link.href === `/${locale}`
-                  ? pathname === `/${locale}`
-                  : pathname.startsWith(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-lg font-medium py-2.5 border-b border-cream-100 transition-colors ${
-                    isActive ? 'text-forest-700 font-bold' : 'text-earth-900'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+        <div className="md:hidden fixed inset-0 top-[113px] bg-cream-100 z-50 border-t border-cream-300 p-6 flex flex-col justify-between overflow-y-auto">
+          <nav className="flex flex-col gap-5 pt-4">
+            {navLinks.map((link, idx) => (
+              <Link
+                key={`${link.href}-${idx}`}
+                href={link.href}
+                className="text-base font-serif font-semibold text-earth-900 py-2 border-b border-cream-200"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
-          <div className="pt-8 flex flex-col gap-4">
+          <div className="pt-8 space-y-4">
             {quickWhatsAppUrl && (
               <a
                 href={quickWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] active:bg-[#20BD5A] text-white text-base font-semibold py-3.5 rounded-xl shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-earth-900 text-cream-100 py-3.5 rounded-full text-xs uppercase tracking-wider font-semibold"
               >
-                <MessageCircle className="w-5 h-5" />
+                <MessageCircle className="w-4 h-4 text-honey-400" />
                 <span>{dict.nav.quickWhatsApp}</span>
               </a>
             )}
-
-            <div className="text-center text-xs text-earth-700/80">
-              <p className="font-semibold text-forest-700">Kamru Ghati Honey</p>
-              <p>Mandi, Himachal Pradesh, India</p>
-            </div>
+            <p className="text-center text-[11px] text-earth-400 uppercase tracking-widest">
+              EST. 2020 • MANDI, HIMACHAL PRADESH
+            </p>
           </div>
         </div>
       )}

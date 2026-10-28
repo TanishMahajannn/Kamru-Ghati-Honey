@@ -65,7 +65,6 @@ export default async function ProductDetailPage({
   }
 
   const relatedProducts = PRODUCTS.filter((p) => p.slug !== slug && p.active).slice(0, 3);
-
   const productName = locale === 'hi' ? product.name.hi : product.name.en;
 
   const breadcrumbs = [
@@ -79,7 +78,7 @@ export default async function ProductDetailPage({
   ];
 
   return (
-    <div className="py-8 md:py-12 bg-white">
+    <div className="py-8 md:py-16 bg-cream-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <Breadcrumbs items={breadcrumbs} locale={locale} />
         <ProductDetailView

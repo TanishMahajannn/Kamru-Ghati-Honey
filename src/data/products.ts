@@ -27,7 +27,7 @@ export const PRODUCTS: HoneyProduct[] = [
       en: 'Kamru Ghati Multi Flora Honey is harvested from bees foraging on wild seasonal blossom flora in the mid-Himalayan region of Himachal Pradesh. With a well-balanced sweetness and mild floral aroma, it is a versatile honey suited for everyday household use.',
       hi: 'कामरू घाटी मल्टी फ्लोरा शहद हिमाचल प्रदेश के मध्य-हिमालयी क्षेत्र में मौसमी जंगली फूलों पर परागण करने वाली मधुमक्खियों से प्राप्त किया जाता है। संतुलित मिठास और सौम्य सुगंध के साथ, यह दैनिक घरेलू उपयोग के लिए उपयुक्त है।',
     },
-    image: '/images/products/multi-flora.svg',
+    image: '/images/products/multi-flora.jpg',
     imageAlt: {
       en: 'Kamru Ghati Multi Flora Honey glass jar',
       hi: 'कामरू घाटी मल्टी फ्लोरा शहद का कांच का जार',
@@ -89,7 +89,7 @@ export const PRODUCTS: HoneyProduct[] = [
       en: 'Harvested from high-altitude zones in Himachal Pradesh where apiculture is carried out during the brief alpine summer. The distinct microclimate and unique flora of the Lahul & Spiti region produce a distinct honey with a thick consistency and distinct floral character.',
       hi: 'हिमाचल प्रदेश के उच्च तुंगता वाले क्षेत्रों से संकलित, जहाँ अल्पकालिक अल्पाइन ग्रीष्म ऋतु में मधुमक्खी पालन किया जाता है। लाहौल-स्पीति का विशेष वातावरण और अनूठी वनस्पति इसे गाढ़ापन और विशिष्ट स्वाद प्रदान करते हैं।',
     },
-    image: '/images/products/lahul-spiti.svg',
+    image: '/images/products/lahul-spiti.jpg',
     imageAlt: {
       en: 'Kamru Ghati Lahul Spiti Honey jar',
       hi: 'कामरू घाटी लाहौल स्पीति शहद का जार',
@@ -151,7 +151,7 @@ export const PRODUCTS: HoneyProduct[] = [
       en: 'Kamru Ghati Ajwain Honey is single-source uni-floral honey collected during the ajwain flowering period. It possesses a characteristic warm, herbal aroma and a gentle spiced undertone naturally inherited from the carom blossom nectar.',
       hi: 'कामरू घाटी अजवायन शहद अजवायन की फूलने की अवधि के दौरान संकलित एक विशिष्ट शहद है। इसमें कैरम के फूलों के पराग से प्राकृतिक रूप से मिलने वाली हल्की हर्बल महक और सौम्य स्वाद होता है।',
     },
-    image: '/images/products/ajwain.svg',
+    image: '/images/products/ajwain.jpg',
     imageAlt: {
       en: 'Kamru Ghati Ajwain Honey jar',
       hi: 'कामरू घाटी अजवायन शहद का जार',
@@ -213,7 +213,7 @@ export const PRODUCTS: HoneyProduct[] = [
       en: 'Kamru Ghati Jamun Honey is harvested from apiaries placed in flowering Jamun (Syzygium cumini) orchards during late spring. Known for its distinctively dark amber hue, less-sweet profile, and pleasant tart undertone.',
       hi: 'कामरू घाटी जामुन शहद वसंत ऋतु के अंत में खिलते जामुन के बागानों में स्थापित पेटियों से एकत्रित किया जाता है। यह अपने गहरे रंग, संतुलित मध्यम मिठास और सौम्य कसैलेपन के लिए पहचाना जाता है।',
     },
-    image: '/images/products/jamun.svg',
+    image: '/images/products/jamun.jpg',
     imageAlt: {
       en: 'Kamru Ghati Jamun Honey jar',
       hi: 'कामरू घाटी जामुन शहद का जार',

@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { MessageCircle, ArrowRight } from 'lucide-react';
 import { buildRetailEnquiryText, createWhatsAppUrl } from '@/lib/whatsapp';
-import { appConfig } from '@/lib/config';
 
 interface ProductCardProps {
   product: HoneyProduct;
@@ -20,7 +19,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, locale, dict }: ProductCardProps) {
-  // Default to the first available size or the 500g option
   const defaultSize =
     product.sizes.find((s) => s.grams === 500 && s.available) ||
     product.sizes.find((s) => s.available) ||
@@ -31,6 +29,9 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
   const productName = locale === 'hi' ? product.name.hi : product.name.en;
   const productDesc = locale === 'hi' ? product.shortDescription.hi : product.shortDescription.en;
   const imageAlt = locale === 'hi' ? product.imageAlt.hi : product.imageAlt.en;
+  const origin = product.characteristics?.origin
+    ? (locale === 'hi' ? product.characteristics.origin.hi : product.characteristics.origin.en)
+    : 'Mandi, Himachal Pradesh';
 
   const enquiryText = buildRetailEnquiryText(
     {
@@ -44,9 +45,9 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
   const whatsAppUrl = createWhatsAppUrl(enquiryText);
 
   return (
-    <div className="group bg-white rounded-2xl border border-cream-200/90 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col overflow-hidden">
-      {/* Product Image Header */}
-      <div className="relative aspect-4/3 w-full bg-cream-50 overflow-hidden p-6 flex items-center justify-center border-b border-cream-100">
+    <div className="group bg-cream-50/80 rounded-2xl border border-cream-200/90 shadow-warm hover:shadow-warm-hover hover:border-cream-300 transition-all duration-300 flex flex-col overflow-hidden">
+      {/* Product Image */}
+      <div className="relative aspect-square w-full bg-cream-100/60 overflow-hidden p-6 flex items-center justify-center border-b border-cream-200/80">
         <Link
           href={`/${locale}/products/${product.slug}`}
           className="relative w-full h-full block group-hover:scale-103 transition-transform duration-300"
@@ -64,37 +65,35 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
 
         {product.featured && (
           <div className="absolute top-3 left-3">
-            <Badge variant="honey" size="sm">
-              {locale === 'hi' ? 'विशेष संकलन' : 'Featured Harvest'}
-            </Badge>
+            <span className="text-[10px] font-semibold uppercase tracking-wider bg-cream-100 text-earth-800 px-2.5 py-1 rounded-full border border-cream-300 shadow-2xs">
+              {locale === 'hi' ? 'विशेष संकलन' : 'Featured'}
+            </span>
           </div>
         )}
-
-        <div className="absolute top-3 right-3">
-          <Badge variant="forest" size="sm">
-            {dict.common.available}
-          </Badge>
-        </div>
       </div>
 
-      {/* Body Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
-        <div>
+      {/* Card Body */}
+      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+        <div className="space-y-2">
           <Link
             href={`/${locale}/products/${product.slug}`}
-            className="focus:outline-none focus:underline"
+            className="focus:outline-none focus:underline block"
           >
-            <h3 className="font-serif font-bold text-forest-900 text-lg sm:text-xl group-hover:text-forest-700 transition-colors">
+            <h3 className="font-serif font-bold text-earth-900 text-lg group-hover:text-honey-700 transition-colors">
               {productName}
             </h3>
           </Link>
-          <p className="mt-2 text-xs sm:text-sm text-earth-700/80 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-earth-600 line-clamp-2 leading-relaxed">
             {productDesc}
           </p>
+          <p className="text-[11px] text-earth-400 font-sans tracking-wide">
+            <span className="font-medium text-earth-500">{locale === 'hi' ? 'स्रोत: ' : 'Origin: '}</span>
+            {origin}
+          </p>
 
-          {/* Size Selector Pills */}
-          <div className="mt-4 pt-3 border-t border-cream-100">
-            <span className="block text-xs font-semibold text-earth-800 mb-1.5">
+          {/* Size Pills */}
+          <div className="pt-3 border-t border-cream-200/80">
+            <span className="block text-[11px] font-semibold text-earth-700 mb-1.5 uppercase tracking-wider">
               {dict.catalogue.sizesAvailable}
             </span>
             <div className="flex flex-wrap gap-1.5" role="group" aria-label="Available jar sizes">
@@ -105,10 +104,10 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
                     key={size.grams}
                     type="button"
                     onClick={() => setSelectedSize(size)}
-                    className={`text-xs px-2.5 py-1 rounded-md font-medium transition-all ${
+                    className={`text-xs px-2.5 py-1 rounded-full font-medium transition-all ${
                       isSelected
-                        ? 'bg-forest-600 text-white font-semibold shadow-xs'
-                        : 'bg-cream-100 text-earth-800 hover:bg-cream-200 border border-cream-200'
+                        ? 'bg-earth-900 text-cream-100 font-semibold'
+                        : 'bg-cream-100 text-earth-700 hover:bg-cream-200 border border-cream-200'
                     }`}
                     aria-pressed={isSelected}
                   >
@@ -121,22 +120,22 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
         </div>
 
         {/* Pricing & Actions */}
-        <div className="mt-5 pt-4 border-t border-cream-100 space-y-3">
+        <div className="mt-5 pt-4 border-t border-cream-200/80 space-y-3">
           <div className="flex items-baseline justify-between">
             <div className="flex items-baseline gap-1">
               <PriceDisplay pricePaise={selectedSize.pricePaise} locale={locale} size="md" />
               {selectedSize.pricePaise !== null && (
-                <span className="text-xs text-earth-700/80">/{dict.common.perJar}</span>
+                <span className="text-[11px] text-earth-500">/{dict.common.perJar}</span>
               )}
             </div>
-            <span className="text-[11px] text-earth-700/70">{selectedSize.label}</span>
+            <span className="text-[11px] text-earth-500">{selectedSize.label}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 pt-1">
             <Link href={`/${locale}/products/${product.slug}`} className="w-full">
-              <Button variant="outline" size="sm" className="w-full">
+              <Button variant="outline" size="sm" className="w-full rounded-full text-xs">
                 <span>{dict.common.viewDetails}</span>
-                <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                <span className="ml-1">→</span>
               </Button>
             </Link>
 
@@ -148,9 +147,9 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
                 className="w-full"
                 aria-label={`${dict.common.enquireWhatsApp} for ${productName}`}
               >
-                <Button variant="whatsapp" size="sm" className="w-full">
+                <Button variant="pill" size="sm" className="w-full rounded-full text-xs px-2">
                   <MessageCircle className="w-3.5 h-3.5 mr-1" />
-                  <span>{dict.common.enquireWhatsApp}</span>
+                  <span>{locale === 'hi' ? 'व्हाट्सएप' : 'Enquire'}</span>
                 </Button>
               </a>
             ) : (
@@ -158,10 +157,10 @@ export function ProductCard({ product, locale, dict }: ProductCardProps) {
                 variant="outline"
                 size="sm"
                 disabled
-                className="w-full opacity-60 cursor-not-allowed text-xs"
+                className="w-full opacity-60 cursor-not-allowed text-xs rounded-full"
                 title={dict.common.pendingSetup}
               >
-                <span>{locale === 'hi' ? 'पूछताछ लंबित' : 'Setup Pending'}</span>
+                <span>{locale === 'hi' ? 'लंबित' : 'Pending'}</span>
               </Button>
             )}
           </div>
