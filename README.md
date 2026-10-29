@@ -140,7 +140,7 @@ cp .env.example .env.local
 
 Example configuration (`.env.local`):
 ```ini
-NEXT_PUBLIC_WHATSAPP_NUMBER=919876543210
+NEXT_PUBLIC_WHATSAPP_NUMBER=919817273374
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_BUSINESS_ADDRESS="Mandi, Himachal Pradesh, India"
 ```

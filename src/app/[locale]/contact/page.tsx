@@ -93,9 +93,19 @@ export default async function ContactPage({
               <h2 className="font-serif font-bold text-earth-900 text-lg mb-2">
                 {dict.contact.whatsappTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-earth-600 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-earth-600 leading-relaxed font-sans mb-3">
                 {dict.contact.whatsappDesc}
               </p>
+              {appConfig.whatsapp.formatted && (
+                <a
+                  href={quickWhatsAppUrl || `https://wa.me/${appConfig.whatsapp.number}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-base font-bold text-earth-900 hover:text-honey-600 transition-colors"
+                >
+                  {appConfig.whatsapp.formatted}
+                </a>
+              )}
             </div>
 
             <div className="mt-6 pt-4 border-t border-cream-200">

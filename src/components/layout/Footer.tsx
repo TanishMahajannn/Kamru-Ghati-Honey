@@ -4,7 +4,7 @@ import { Locale } from '@/types/i18n';
 import { Dictionary } from '@/i18n/getDictionary';
 import { BrandLogo } from '@/components/icons/BrandLogo';
 import { PRODUCTS } from '@/data/products';
-import { MapPin, Phone, Mail, ShieldAlert } from 'lucide-react';
+import { MapPin, Phone, Mail, ShieldAlert, MessageCircle } from 'lucide-react';
 import { appConfig } from '@/lib/config';
 
 interface FooterProps {
@@ -33,7 +33,26 @@ export function Footer({ locale, dict }: FooterProps) {
               {appConfig.contact.phone && (
                 <div className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-honey-600 flex-shrink-0" />
-                  <span>{appConfig.contact.phone}</span>
+                  <a href={`tel:${appConfig.contact.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-honey-600">
+                    {appConfig.contact.phone}
+                  </a>
+                </div>
+              )}
+              {appConfig.whatsapp.isConfigured && (
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="w-3.5 h-3.5 text-honey-600 flex-shrink-0" />
+                  <a
+                    href={`https://wa.me/${appConfig.whatsapp.number}?text=${encodeURIComponent(
+                      locale === 'hi'
+                        ? 'नमस्ते कामरू घाटी हनी, मैं आपके शहद उत्पादों के बारे में जानकारी चाहता/चाहती हूँ।'
+                        : 'Hello Kamru Ghati Honey, I would like to enquire about your honey varieties.'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-honey-600 font-medium"
+                  >
+                    {appConfig.whatsapp.formatted || `+${appConfig.whatsapp.number}`} (WhatsApp)
+                  </a>
                 </div>
               )}
               {appConfig.contact.email && (
