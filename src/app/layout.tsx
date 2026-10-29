@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  icons: {
+    icon: '/images/brand/logo.png',
+    shortcut: '/images/brand/logo.png',
+    apple: '/images/brand/logo.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_IN',
@@ -40,19 +45,19 @@ export const metadata: Metadata = {
       'Natural single-origin floral honey harvested from Himachal Pradesh. Direct WhatsApp ordering for retail and wholesale.',
     images: [
       {
-        url: '/images/products/multi-flora.svg',
-        width: 600,
-        height: 600,
-        alt: 'Kamru Ghati Honey Jar',
+        url: '/images/brand/logo.png',
+        width: 1200,
+        height: 1200,
+        alt: 'Kamru Ghati Honey Brand Logo',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Kamru Ghati Honey | Pure Himalayan Honey',
     description:
       'Natural honey varieties from Mandi, Himachal Pradesh. Established 2020. WhatsApp ordering across India.',
-    images: ['/images/products/multi-flora.svg'],
+    images: ['/images/brand/logo.png'],
   },
   robots: {
     index: true,

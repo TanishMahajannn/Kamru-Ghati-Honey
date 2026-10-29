@@ -20,7 +20,7 @@ export function Footer({ locale, dict }: FooterProps) {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex justify-start">
-              <BrandLogo showSubtitle={true} className="items-start text-left" />
+              <BrandLogo showSubtitle={true} />
             </div>
             <p className="text-xs sm:text-sm text-earth-600 leading-relaxed max-w-sm pt-2">
               {dict.footer.about}

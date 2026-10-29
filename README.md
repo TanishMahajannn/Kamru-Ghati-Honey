@@ -59,7 +59,7 @@ kamru-ghati-honey/
 ├── public/
 │   └── images/
 │       ├── brand/
-│       │   └── logo.svg         # Bespoke brand vector mark
+│       │   └── logo.png         # Official brand seal & mark (Logo.png)
 │       └── products/            # Individual variety illustrations
 │           ├── multi-flora.svg
 │           ├── lahul-spiti.svg
